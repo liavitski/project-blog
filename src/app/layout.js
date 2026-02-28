@@ -7,6 +7,15 @@ import { LIGHT_TOKENS, DARK_TOKENS } from '@/constants';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import './styles.css';
+import { BLOG_TITLE } from '@/constants';
+
+export const metadata = {
+  title: {
+    default: BLOG_TITLE,
+    template: `%s • ${BLOG_TITLE}`,
+  },
+  description: 'A wonderful blog about JavaScript',
+};
 
 const mainFont = Work_Sans({
   subsets: ['latin'],
