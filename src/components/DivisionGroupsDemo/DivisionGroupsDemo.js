@@ -18,9 +18,7 @@ function DivisionGroupsDemo({
     initialNumOfGroups
   );
 
-  const numOfItemsPerGroup = Math.floor(
-    numOfItems / numOfGroups
-  );
+  const numOfItemsPerGroup = Math.floor(numOfItems / numOfGroups);
 
   const remainder = includeRemainderArea
     ? numOfItems % numOfGroups
@@ -48,26 +46,16 @@ function DivisionGroupsDemo({
           min={1}
           max={4}
           value={numOfGroups}
-          onChange={(ev) =>
-            setNumOfGroups(Number(ev.target.value))
-          }
+          onChange={(ev) => setNumOfGroups(Number(ev.target.value))}
         />
       </header>
 
       <div className={styles.demoWrapper}>
-        <div
-          className={clsx(styles.demoArea)}
-          style={gridStructure}
-        >
+        <div className={clsx(styles.demoArea)} style={gridStructure}>
           {range(numOfGroups).map((groupIndex) => (
             <div key={groupIndex} className={styles.group}>
               {range(numOfItemsPerGroup).map((index) => {
-                return (
-                  <div
-                    key={index}
-                    className={styles.item}
-                  />
-                );
+                return <div key={index} className={styles.item} />;
               })}
             </div>
           ))}
@@ -76,14 +64,10 @@ function DivisionGroupsDemo({
 
       {includeRemainderArea && (
         <div className={styles.remainderArea}>
-          <p className={styles.remainderHeading}>
-            Remainder Area
-          </p>
+          <p className={styles.remainderHeading}>Remainder Area</p>
 
           {range(remainder).map((index) => {
-            return (
-              <div key={index} className={styles.item} />
-            );
+            return <div key={index} className={styles.item} />;
           })}
         </div>
       )}
