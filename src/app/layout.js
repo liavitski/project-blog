@@ -4,10 +4,11 @@ import clsx from 'clsx';
 import { MotionConfig } from 'motion/react';
 
 import { LIGHT_TOKENS, DARK_TOKENS } from '@/constants';
+import './styles.css';
+import { cookies } from 'next/headers';
 
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import './styles.css';
 import { BLOG_TITLE } from '@/constants';
 
 export const metadata = {
@@ -31,9 +32,9 @@ const monoFont = Spline_Sans_Mono({
   variable: '--font-family-mono',
 });
 
-function RootLayout({ children }) {
-  // TODO: Dynamic theme depending on user preference
-  const theme = 'light';
+async function RootLayout({ children }) {
+  const savedTheme = (await cookies()).get('color-theme');
+  const theme = savedTheme?.value || 'light';
 
   return (
     <MotionConfig reducedMotion="user">
