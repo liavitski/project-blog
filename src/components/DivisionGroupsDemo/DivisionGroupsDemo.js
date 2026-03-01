@@ -20,6 +20,7 @@ function DivisionGroupsDemo({
   );
 
   const numOfItemsPerGroup = Math.floor(numOfItems / numOfGroups);
+  const totalInGroups = numOfGroups * numOfItemsPerGroup;
 
   const remainder = includeRemainderArea
     ? numOfItems % numOfGroups
@@ -58,14 +59,15 @@ function DivisionGroupsDemo({
             style={gridStructure}
           >
             {range(numOfGroups).map((groupIndex) => {
+              const totalInPrevGroups =
+                groupIndex * numOfItemsPerGroup;
               return (
                 <div key={groupIndex} className={styles.group}>
-                  {range(numOfItemsPerGroup).map((index) => {
-                    const totalInPrevGroups =
-                      groupIndex * numOfItemsPerGroup;
-                    const layoutId = `${id}-${
-                      totalInPrevGroups + index
-                    }`;
+                  {range(
+                    totalInPrevGroups,
+                    totalInPrevGroups + numOfItemsPerGroup
+                  ).map((index) => {
+                    const layoutId = `${id}-${index}`;
                     return (
                       <motion.div
                         key={layoutId}
@@ -84,8 +86,17 @@ function DivisionGroupsDemo({
           <div className={styles.remainderArea}>
             <p className={styles.remainderHeading}>Remainder Area</p>
 
-            {range(remainder).map((index) => {
-              return <div key={index} className={styles.item} />;
+            {range(totalInGroups, numOfItems).map((index) => {
+              const layoutId = `${id}-${index}`;
+              return (
+                <motion.div
+                  key={layoutId}
+                  layoutId={layoutId}
+                  className={styles.item}
+                >
+                  {index}
+                </motion.div>
+              );
             })}
           </div>
         )}
